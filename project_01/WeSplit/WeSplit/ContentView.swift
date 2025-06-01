@@ -53,6 +53,7 @@ struct ContentView: View {
                 
                 Section {
                     Text(finalCheckAmount, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
+                        .foregroundStyle(tipPersentage == 0 ? .red : .primary)
                 }
             }
             .navigationTitle("WeSplit")
