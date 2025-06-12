@@ -26,6 +26,8 @@ struct ContentView: View {
     
     @State private var score = 0
     
+    @State private var flagTapped = 0
+    
     @State private var roundsLeft = 8
     
     var body: some View {
@@ -56,10 +58,16 @@ struct ContentView: View {
                     
                     ForEach(0..<3) { number in
                         Button {
+                            flagTapped = number
+                            
                             flagTapped(number)
                         } label: {
                             FlagImage(countryName: countries[number])
                         }
+                        .rotationEffect(Angle.degrees(flagTapped == number ? 360 : 0))
+                        .opacity(flagTapped == number ? 1.0 : 0.25)
+                        .scaleEffect(flagTapped == number ? 1.0 : 0.85)
+                        .animation(.easeIn, value: flagTapped)
                     }
                 }
                 .frame(maxWidth: .infinity)
